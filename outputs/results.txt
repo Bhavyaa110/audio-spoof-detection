@@ -1,0 +1,74 @@
+TRAINING HISTORY
+==================================================
+Epoch 1
+  Train Loss     : 0.2635
+  Train Accuracy : 89.10%
+  Train Error    : 10.90%
+  Val Loss       : 0.4839
+  Val Accuracy   : 84.10%
+  Val Error      : 15.90%
+--------------------------------------------------
+Epoch 2
+  Train Loss     : 0.0836
+  Train Accuracy : 97.04%
+  Train Error    : 2.96%
+  Val Loss       : 0.4702
+  Val Accuracy   : 88.40%
+  Val Error      : 11.60%
+--------------------------------------------------
+Epoch 3
+  Train Loss     : 0.0481
+  Train Accuracy : 98.44%
+  Train Error    : 1.56%
+  Val Loss       : 0.1307
+  Val Accuracy   : 94.85%
+  Val Error      : 5.15%
+--------------------------------------------------
+Epoch 4
+  Train Loss     : 0.0301
+  Train Accuracy : 98.95%
+  Train Error    : 1.05%
+  Val Loss       : 0.4768
+  Val Accuracy   : 91.00%
+  Val Error      : 9.00%
+--------------------------------------------------
+Epoch 5
+  Train Loss     : 0.0300
+  Train Accuracy : 98.86%
+  Train Error    : 1.14%
+  Val Loss       : 0.8791
+  Val Accuracy   : 82.20%
+  Val Error      : 17.80%
+--------------------------------------------------
+Epoch 6
+  Train Loss     : 0.0277
+  Train Accuracy : 99.02%
+  Train Error    : 0.98%
+  Val Loss       : 0.2377
+  Val Accuracy   : 94.20%
+  Val Error      : 5.80%
+--------------------------------------------------
+Epoch 7
+  Train Loss     : 0.0265
+  Train Accuracy : 99.19%
+  Train Error    : 0.81%
+  Val Loss       : 1.0276
+  Val Accuracy   : 83.20%
+  Val Error      : 16.80%
+--------------------------------------------------
+Epoch 8
+  Train Loss     : 0.0189
+  Train Accuracy : 99.41%
+  Train Error    : 0.59%
+  Val Loss       : 0.4974
+  Val Accuracy   : 90.70%
+  Val Error      : 9.30%
+--------------------------------------------------
+
+FINAL RESULTS
+==================================================
+  Best Val Loss        : 0.1307
+  Final Train Accuracy : 99.41%
+  Final Train Error    : 0.59%
+  Final Val Accuracy   : 90.70%
+  Final Val Error      : 9.30%
