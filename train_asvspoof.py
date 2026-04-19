@@ -1,5 +1,4 @@
 import os
-import pickle
 import torch
 import torch.nn as nn
 from torch.utils.data import DataLoader, random_split
@@ -35,7 +34,7 @@ print(f"Validation samples: {val_size}")
 print("-" * 50)
 
 # ===== MODEL =====
-model     = DeepRawNet(dropout_rate=0.3).to(DEVICE)
+model     = DeepRawNet(dropout_rate=0.2).to(DEVICE)
 criterion = nn.NLLLoss()
 optimizer = torch.optim.Adam(model.parameters(), lr=LR)
 
