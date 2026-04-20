@@ -8,4 +8,4 @@ EPOCHS = 30
 LR = 0.0001
 
 DEVICE = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
-MODEL_PATH = "outputs/deeprawnet.pth"
+MODEL_PATH = "outputs/deeprawnet_model.pth"
