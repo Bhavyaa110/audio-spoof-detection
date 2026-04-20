@@ -19,7 +19,7 @@ class ASVspoofDataset(Dataset):
 
                 self.data.append((file_name, label))
         
-        self.data = self.data[:500]  # Limit to 500 samples for faster training
+        # self.data = self.data[:10000]  # Limit to 500 samples for faster training
 
     def __len__(self):
         return len(self.data)
