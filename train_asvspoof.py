@@ -167,10 +167,10 @@ os.makedirs("outputs", exist_ok=True)
 # Save best model weights as .pth
 # ===== SAVE =====
 torch.save(best_model_state, MODEL_PATH)
-print("\nBest model saved to outputs/deeprawnet.pth")
+print("\nBest model saved to outputs/deeprawnet_model.pth")
 
 # Save training history to results.txt
-with open("outputs/results.txt", "w") as f:
+with open("outputs/results_deeprawnet.txt", "w") as f:
     f.write("TRAINING HISTORY\n")
     f.write("=" * 50 + "\n")
     for epoch in range(len(history["train_loss"])):
