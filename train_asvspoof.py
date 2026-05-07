@@ -1,12 +1,21 @@
 import os
+import numpy as np
 import torch
 import torch.nn as nn
 from torch.utils.data import DataLoader
 from tqdm import tqdm
+from sklearn.metrics import roc_curve
 
 from models.deeprawnet import DeepRawNet
 from utils.asvspoof_loader import ASVspoofDataset
 from config import *
+
+def compute_eer(labels, scores):
+    fpr, tpr, _ = roc_curve(labels, scores, pos_label=1)
+    fnr = 1 - tpr
+    eer_index = np.argmin(np.abs(fpr - fnr))
+    eer = (fpr[eer_index] + fnr[eer_index]) / 2 * 100
+    return eer
 
 if __name__ == '__main__':
 
@@ -40,9 +49,9 @@ if __name__ == '__main__':
     weights   = torch.tensor([4.0, 1.0]).to(DEVICE)
     criterion = nn.NLLLoss(weight=weights)
     optimizer = torch.optim.Adam(model.parameters(), lr=LR)
-    scheduler = torch.optim.lr_scheduler.ReduceLROnPlateau(
-        optimizer, mode='min', patience=2, factor=0.5
-    )
+    # scheduler = torch.optim.lr_scheduler.ReduceLROnPlateau(
+    #     optimizer, mode='min', patience=2, factor=0.5
+    # )
 
     # ===== EARLY STOPPING SETUP =====
     PATIENCE         = 5
@@ -55,9 +64,11 @@ if __name__ == '__main__':
         "train_loss"    : [],
         "train_accuracy": [],
         "train_error"   : [],
+        "train_eer"     : [],   # add this
         "val_accuracy"  : [],
         "val_error"     : [],
         "val_loss"      : [],
+        "val_eer"       : [],   # add this
     }
 
     print("Starting Training...\n")
@@ -67,10 +78,13 @@ if __name__ == '__main__':
         print(f"Epoch [{epoch+1}/{EPOCHS}]")
 
         # ---- Training ----
+        # ---- Training ----
         model.train()
         total_loss    = 0
         train_correct = 0
         train_total   = 0
+        train_scores  = []   # add this
+        train_labels  = []   # add this
 
         train_bar = tqdm(train_loader, desc="  Training  ", unit="batch", ncols=80)
 
@@ -85,21 +99,27 @@ if __name__ == '__main__':
             optimizer.step()
 
             total_loss    += loss.item()
+            prob           = torch.exp(output)                   # add this
             predicted      = torch.argmax(output, dim=1)
             train_correct += (predicted == y).sum().item()
             train_total   += y.size(0)
+            train_scores.extend(prob[:, 1].cpu().tolist())       # add this
+            train_labels.extend(y.cpu().tolist())                # add this
 
             train_bar.set_postfix(loss=f"{loss.item():.4f}")
 
         avg_train_loss = total_loss / len(train_loader)
         train_accuracy = (train_correct / train_total) * 100
         train_error    = 100 - train_accuracy
+        train_eer      = compute_eer(train_labels, train_scores)   # add this
 
         # ---- Validation ----
         model.eval()
         val_loss    = 0
         val_correct = 0
         val_total   = 0
+        val_scores  = []   # add this
+        val_labels  = []   # add this
 
         val_bar = tqdm(val_loader, desc="  Validating", unit="batch", ncols=80)
 
@@ -112,36 +132,44 @@ if __name__ == '__main__':
                 loss     = criterion(output, y)
                 val_loss += loss.item()
 
+                prob        = torch.exp(output)                  # add this
                 predicted   = torch.argmax(output, dim=1)
                 val_correct += (predicted == y).sum().item()
                 val_total   += y.size(0)
+                val_scores.extend(prob[:, 1].cpu().tolist())     # add this
+                val_labels.extend(y.cpu().tolist())              # add this
 
                 val_bar.set_postfix(loss=f"{loss.item():.4f}")
 
         avg_val_loss = val_loss / len(val_loader)
         val_accuracy = (val_correct / val_total) * 100
         val_error    = 100 - val_accuracy
+        val_eer      = compute_eer(val_labels, val_scores)   # add this
 
         # Step scheduler based on val loss
-        scheduler.step(avg_val_loss)
+        # scheduler.step(avg_val_loss)
 
         # ---- Store history ----
         history["train_loss"].append(avg_train_loss)
         history["train_accuracy"].append(train_accuracy)
         history["train_error"].append(train_error)
+        history["train_eer"].append(train_eer)   # add this
         history["val_loss"].append(avg_val_loss)
         history["val_accuracy"].append(val_accuracy)
         history["val_error"].append(val_error)
-
+        history["val_eer"].append(val_eer)
+        
         # ---- Print epoch summary ----
-        current_lr = optimizer.param_groups[0]['lr']
+        # current_lr = optimizer.param_groups[0]['lr']
         print(f"  Train Loss     : {avg_train_loss:.4f}")
         print(f"  Train Accuracy : {train_accuracy:.2f}%")
         print(f"  Train Error    : {train_error:.2f}%")
+        print(f"  Train EER      : {train_eer:.2f}%")   # add this
         print(f"  Val Loss       : {avg_val_loss:.4f}")
         print(f"  Val Accuracy   : {val_accuracy:.2f}%")
         print(f"  Val Error      : {val_error:.2f}%")
-        print(f"  Learning Rate  : {current_lr:.6f}")
+        print(f"  Val EER          : {val_eer:.2f}%")
+        # print(f"  Learning Rate  : {current_lr:.6f}")
         print("-" * 50)
 
         # ---- Early Stopping Check ----
@@ -166,8 +194,10 @@ if __name__ == '__main__':
     print(f"  Best Val Loss        : {best_val_loss:.4f}")
     print(f"  Final Train Accuracy : {history['train_accuracy'][-1]:.2f}%")
     print(f"  Final Train Error    : {history['train_error'][-1]:.2f}%")
+    print(f"  Final Train EER      : {history['train_eer'][-1]:.2f}%")   # add this
     print(f"  Final Val Accuracy   : {history['val_accuracy'][-1]:.2f}%")
     print(f"  Final Val Error      : {history['val_error'][-1]:.2f}%")
+    print(f"  Final Val EER        : {history['val_eer'][-1]:.2f}%")
     print("=" * 50)
 
     # ===== SAVE =====
@@ -185,16 +215,20 @@ if __name__ == '__main__':
             f.write(f"  Train Loss     : {history['train_loss'][epoch]:.4f}\n")
             f.write(f"  Train Accuracy : {history['train_accuracy'][epoch]:.2f}%\n")
             f.write(f"  Train Error    : {history['train_error'][epoch]:.2f}%\n")
+            f.write(f"  Train EER      : {history['train_eer'][epoch]:.2f}%\n")   # add this
             f.write(f"  Val Loss       : {history['val_loss'][epoch]:.4f}\n")
             f.write(f"  Val Accuracy   : {history['val_accuracy'][epoch]:.2f}%\n")
             f.write(f"  Val Error      : {history['val_error'][epoch]:.2f}%\n")
+            f.write(f"  Val EER        : {history['val_eer'][epoch]:.2f}%\n")   # add this
             f.write("-" * 50 + "\n")
         f.write("\nFINAL RESULTS\n")
         f.write("=" * 50 + "\n")
         f.write(f"  Best Val Loss        : {best_val_loss:.4f}\n")
         f.write(f"  Final Train Accuracy : {history['train_accuracy'][-1]:.2f}%\n")
         f.write(f"  Final Train Error    : {history['train_error'][-1]:.2f}%\n")
+        f.write(f"  Final Train EER      : {history['train_eer'][-1]:.2f}%\n")   # add this
         f.write(f"  Final Val Accuracy   : {history['val_accuracy'][-1]:.2f}%\n")
         f.write(f"  Final Val Error      : {history['val_error'][-1]:.2f}%\n")
+        f.write(f"  Final Val EER        : {history['val_eer'][-1]:.2f}%\n")   # add this
 
     print("Results saved to outputs/results.txt")

@@ -1,3 +1,4 @@
+import os
 import torch
 from torch.utils.data import DataLoader
 from sklearn.metrics import accuracy_score
@@ -65,3 +66,15 @@ print(f"  Accuracy      : {accuracy:.2f}%")
 print(f"  Error Rate    : {error_rate:.2f}%")
 print(f"  EER           : {eer:.2f}%")
 print("=" * 50)
+
+os.makedirs("outputs", exist_ok=True)
+with open("outputs/eval_results.txt", "w") as f:
+    f.write("EVALUATION RESULTS\n")
+    f.write("=" * 50 + "\n")
+    f.write(f"  Total Samples : {len(labels)}\n")
+    f.write(f"  Accuracy      : {accuracy:.2f}%\n")
+    f.write(f"  Error Rate    : {error_rate:.2f}%\n")
+    f.write(f"  EER           : {eer:.2f}%\n")
+    f.write("=" * 50 + "\n")
+
+print("Results saved to outputs/eval_results.txt")

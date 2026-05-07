@@ -1,210 +1,232 @@
 TRAINING HISTORY
 ==================================================
 Epoch 1
-  Train Loss     : 0.2584
-  Train Accuracy : 92.62%
-  Train Error    : 7.38%
-  Val Loss       : 0.0815
-  Val Accuracy   : 97.00%
-  Val Error      : 3.00%
+  Train Loss     : 0.2743
+  Train Accuracy : 91.73%
+  Train Error    : 8.27%
+  Train EER      : 14.89%
+  Val Loss       : 0.1882
+  Val Accuracy   : 94.59%
+  Val Error      : 5.41%
+  Val EER        : 11.63%
 --------------------------------------------------
 Epoch 2
-  Train Loss     : 0.0708
-  Train Accuracy : 98.05%
-  Train Error    : 1.95%
-  Val Loss       : 0.1154
-  Val Accuracy   : 95.67%
-  Val Error      : 4.33%
+  Train Loss     : 0.0613
+  Train Accuracy : 98.22%
+  Train Error    : 1.78%
+  Train EER      : 2.40%
+  Val Loss       : 0.2107
+  Val Accuracy   : 94.93%
+  Val Error      : 5.07%
+  Val EER        : 6.54%
 --------------------------------------------------
 Epoch 3
-  Train Loss     : 0.0410
-  Train Accuracy : 98.94%
-  Train Error    : 1.06%
-  Val Loss       : 0.0565
-  Val Accuracy   : 97.93%
-  Val Error      : 2.07%
+  Train Loss     : 0.0275
+  Train Accuracy : 99.34%
+  Train Error    : 0.66%
+  Train EER      : 1.08%
+  Val Loss       : 0.0307
+  Val Accuracy   : 98.96%
+  Val Error      : 1.04%
+  Val EER        : 1.95%
 --------------------------------------------------
 Epoch 4
-  Train Loss     : 0.0229
-  Train Accuracy : 99.42%
-  Train Error    : 0.58%
-  Val Loss       : 0.0675
-  Val Accuracy   : 98.30%
-  Val Error      : 1.70%
+  Train Loss     : 0.0238
+  Train Accuracy : 99.36%
+  Train Error    : 0.64%
+  Train EER      : 0.85%
+  Val Loss       : 0.0545
+  Val Accuracy   : 98.39%
+  Val Error      : 1.61%
+  Val EER        : 2.91%
 --------------------------------------------------
 Epoch 5
-  Train Loss     : 0.0230
-  Train Accuracy : 99.37%
-  Train Error    : 0.63%
-  Val Loss       : 0.0362
-  Val Accuracy   : 98.62%
-  Val Error      : 1.38%
+  Train Loss     : 0.0206
+  Train Accuracy : 99.47%
+  Train Error    : 0.53%
+  Train EER      : 0.66%
+  Val Loss       : 0.0491
+  Val Accuracy   : 98.89%
+  Val Error      : 1.11%
+  Val EER        : 1.76%
 --------------------------------------------------
 Epoch 6
-  Train Loss     : 0.0146
-  Train Accuracy : 99.63%
-  Train Error    : 0.37%
-  Val Loss       : 0.0322
-  Val Accuracy   : 99.14%
-  Val Error      : 0.86%
+  Train Loss     : 0.0145
+  Train Accuracy : 99.64%
+  Train Error    : 0.36%
+  Train EER      : 0.55%
+  Val Loss       : 0.0239
+  Val Accuracy   : 99.24%
+  Val Error      : 0.76%
+  Val EER        : 0.90%
 --------------------------------------------------
 Epoch 7
-  Train Loss     : 0.0131
-  Train Accuracy : 99.69%
-  Train Error    : 0.31%
-  Val Loss       : 0.0714
-  Val Accuracy   : 98.44%
-  Val Error      : 1.56%
---------------------------------------------------
-Epoch 8
-  Train Loss     : 0.0102
-  Train Accuracy : 99.73%
-  Train Error    : 0.27%
-  Val Loss       : 0.0321
-  Val Accuracy   : 98.98%
-  Val Error      : 1.02%
---------------------------------------------------
-Epoch 9
-  Train Loss     : 0.0094
+  Train Loss     : 0.0098
   Train Accuracy : 99.74%
   Train Error    : 0.26%
-  Val Loss       : 0.0300
-  Val Accuracy   : 99.14%
-  Val Error      : 0.86%
+  Train EER      : 0.43%
+  Val Loss       : 0.0206
+  Val Accuracy   : 99.40%
+  Val Error      : 0.60%
+  Val EER        : 1.09%
+--------------------------------------------------
+Epoch 8
+  Train Loss     : 0.0117
+  Train Accuracy : 99.66%
+  Train Error    : 0.34%
+  Train EER      : 0.47%
+  Val Loss       : 0.0278
+  Val Accuracy   : 99.19%
+  Val Error      : 0.81%
+  Val EER        : 0.51%
+--------------------------------------------------
+Epoch 9
+  Train Loss     : 0.0053
+  Train Accuracy : 99.89%
+  Train Error    : 0.11%
+  Train EER      : 0.15%
+  Val Loss       : 0.0583
+  Val Accuracy   : 98.66%
+  Val Error      : 1.34%
+  Val EER        : 2.05%
 --------------------------------------------------
 Epoch 10
-  Train Loss     : 0.0082
-  Train Accuracy : 99.81%
-  Train Error    : 0.19%
-  Val Loss       : 0.0129
-  Val Accuracy   : 99.60%
-  Val Error      : 0.40%
+  Train Loss     : 0.0085
+  Train Accuracy : 99.79%
+  Train Error    : 0.21%
+  Train EER      : 0.38%
+  Val Loss       : 0.0266
+  Val Accuracy   : 99.39%
+  Val Error      : 0.61%
+  Val EER        : 0.66%
 --------------------------------------------------
 Epoch 11
-  Train Loss     : 0.0074
-  Train Accuracy : 99.82%
-  Train Error    : 0.18%
-  Val Loss       : 0.0156
-  Val Accuracy   : 99.67%
-  Val Error      : 0.33%
+  Train Loss     : 0.0082
+  Train Accuracy : 99.85%
+  Train Error    : 0.15%
+  Train EER      : 0.28%
+  Val Loss       : 0.0254
+  Val Accuracy   : 99.44%
+  Val Error      : 0.56%
+  Val EER        : 1.02%
 --------------------------------------------------
 Epoch 12
-  Train Loss     : 0.0065
-  Train Accuracy : 99.83%
-  Train Error    : 0.17%
-  Val Loss       : 0.0303
-  Val Accuracy   : 99.08%
-  Val Error      : 0.92%
+  Train Loss     : 0.0029
+  Train Accuracy : 99.91%
+  Train Error    : 0.09%
+  Train EER      : 0.09%
+  Val Loss       : 0.0195
+  Val Accuracy   : 99.48%
+  Val Error      : 0.52%
+  Val EER        : 0.52%
 --------------------------------------------------
 Epoch 13
-  Train Loss     : 0.0060
-  Train Accuracy : 99.80%
-  Train Error    : 0.20%
-  Val Loss       : 0.0166
-  Val Accuracy   : 99.59%
-  Val Error      : 0.41%
+  Train Loss     : 0.0043
+  Train Accuracy : 99.90%
+  Train Error    : 0.10%
+  Train EER      : 0.12%
+  Val Loss       : 0.0556
+  Val Accuracy   : 98.25%
+  Val Error      : 1.75%
+  Val EER        : 1.76%
 --------------------------------------------------
 Epoch 14
-  Train Loss     : 0.0027
-  Train Accuracy : 99.95%
-  Train Error    : 0.05%
-  Val Loss       : 0.0105
-  Val Accuracy   : 99.72%
-  Val Error      : 0.28%
+  Train Loss     : 0.0043
+  Train Accuracy : 99.88%
+  Train Error    : 0.12%
+  Train EER      : 0.16%
+  Val Loss       : 0.0611
+  Val Accuracy   : 98.83%
+  Val Error      : 1.17%
+  Val EER        : 1.69%
 --------------------------------------------------
 Epoch 15
-  Train Loss     : 0.0007
-  Train Accuracy : 99.98%
-  Train Error    : 0.02%
-  Val Loss       : 0.0467
-  Val Accuracy   : 99.17%
-  Val Error      : 0.83%
+  Train Loss     : 0.0054
+  Train Accuracy : 99.89%
+  Train Error    : 0.11%
+  Train EER      : 0.13%
+  Val Loss       : 0.0433
+  Val Accuracy   : 99.07%
+  Val Error      : 0.93%
+  Val EER        : 1.57%
 --------------------------------------------------
 Epoch 16
-  Train Loss     : 0.0030
-  Train Accuracy : 99.94%
-  Train Error    : 0.06%
-  Val Loss       : 0.0104
+  Train Loss     : 0.0046
+  Train Accuracy : 99.87%
+  Train Error    : 0.13%
+  Train EER      : 0.15%
+  Val Loss       : 0.0112
   Val Accuracy   : 99.72%
   Val Error      : 0.28%
+  Val EER        : 0.39%
 --------------------------------------------------
 Epoch 17
-  Train Loss     : 0.0006
-  Train Accuracy : 99.99%
-  Train Error    : 0.01%
-  Val Loss       : 0.0153
-  Val Accuracy   : 99.69%
-  Val Error      : 0.31%
+  Train Loss     : 0.0047
+  Train Accuracy : 99.91%
+  Train Error    : 0.09%
+  Train EER      : 0.12%
+  Val Loss       : 0.0072
+  Val Accuracy   : 99.82%
+  Val Error      : 0.18%
+  Val EER        : 0.36%
 --------------------------------------------------
 Epoch 18
-  Train Loss     : 0.0020
+  Train Loss     : 0.0013
   Train Accuracy : 99.96%
   Train Error    : 0.04%
-  Val Loss       : 0.0116
-  Val Accuracy   : 99.77%
-  Val Error      : 0.23%
+  Train EER      : 0.05%
+  Val Loss       : 0.0117
+  Val Accuracy   : 99.70%
+  Val Error      : 0.30%
+  Val EER        : 0.28%
 --------------------------------------------------
 Epoch 19
-  Train Loss     : 0.0030
-  Train Accuracy : 99.93%
-  Train Error    : 0.07%
-  Val Loss       : 0.0095
-  Val Accuracy   : 99.78%
-  Val Error      : 0.22%
+  Train Loss     : 0.0035
+  Train Accuracy : 99.91%
+  Train Error    : 0.09%
+  Train EER      : 0.15%
+  Val Loss       : 0.0205
+  Val Accuracy   : 99.62%
+  Val Error      : 0.38%
+  Val EER        : 0.43%
 --------------------------------------------------
 Epoch 20
-  Train Loss     : 0.0009
-  Train Accuracy : 99.98%
-  Train Error    : 0.02%
-  Val Loss       : 0.0083
-  Val Accuracy   : 99.81%
-  Val Error      : 0.19%
+  Train Loss     : 0.0020
+  Train Accuracy : 99.94%
+  Train Error    : 0.06%
+  Train EER      : 0.08%
+  Val Loss       : 0.0201
+  Val Accuracy   : 99.57%
+  Val Error      : 0.43%
+  Val EER        : 0.39%
 --------------------------------------------------
 Epoch 21
-  Train Loss     : 0.0018
-  Train Accuracy : 99.94%
-  Train Error    : 0.06%
-  Val Loss       : 0.0155
-  Val Accuracy   : 99.65%
-  Val Error      : 0.35%
---------------------------------------------------
-Epoch 22
-  Train Loss     : 0.0024
-  Train Accuracy : 99.94%
-  Train Error    : 0.06%
-  Val Loss       : 0.0215
-  Val Accuracy   : 99.55%
-  Val Error      : 0.45%
---------------------------------------------------
-Epoch 23
-  Train Loss     : 0.0005
-  Train Accuracy : 99.98%
-  Train Error    : 0.02%
-  Val Loss       : 0.0287
-  Val Accuracy   : 99.47%
-  Val Error      : 0.53%
---------------------------------------------------
-Epoch 24
-  Train Loss     : 0.0001
-  Train Accuracy : 100.00%
-  Train Error    : 0.00%
-  Val Loss       : 0.0617
-  Val Accuracy   : 98.99%
-  Val Error      : 1.01%
---------------------------------------------------
-Epoch 25
   Train Loss     : 0.0000
   Train Accuracy : 100.00%
   Train Error    : 0.00%
-  Val Loss       : 0.0296
-  Val Accuracy   : 99.51%
-  Val Error      : 0.49%
+  Train EER      : 0.00%
+  Val Loss       : 0.0113
+  Val Accuracy   : 99.80%
+  Val Error      : 0.20%
+  Val EER        : 0.28%
+--------------------------------------------------
+Epoch 22
+  Train Loss     : 0.0050
+  Train Accuracy : 99.86%
+  Train Error    : 0.14%
+  Train EER      : 0.15%
+  Val Loss       : 0.0285
+  Val Accuracy   : 99.40%
+  Val Error      : 0.60%
+  Val EER        : 0.87%
 --------------------------------------------------
 
 FINAL RESULTS
 ==================================================
-  Best Val Loss        : 0.0083
-  Final Train Accuracy : 100.00%
-  Final Train Error    : 0.00%
-  Final Val Accuracy   : 99.51%
-  Final Val Error      : 0.49%
+  Best Val Loss        : 0.0072
+  Final Train Accuracy : 99.86%
+  Final Train Error    : 0.14%
+  Final Train EER      : 0.15%
+  Final Val Accuracy   : 99.40%
+  Final Val Error      : 0.60%
+  Final Val EER        : 0.87%
