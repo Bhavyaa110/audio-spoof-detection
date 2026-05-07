@@ -1,6 +1,8 @@
 Project Folder Structure
 
 ├── .gitignore
+├── DeepRawNet_SceneFake.ipynb
+├── HAAQI_SceneFake.ipynb
 ├── asvspoof_dataset
 │   ├── ASVspoof2019_LA_asv_protocols
 │   │   ├── ASVspoof2019.LA.asv.dev.female.trl.txt
@@ -39,6 +41,36 @@ Project Folder Structure
 │   │   │   ├── framed
 │   │   │   │   ├── 3sec
 │   │   │   │   └── 5sec
+│   │   │   │       └── IndicSUPERB_cloned
+│   │   │   │           ├── 1052
+│   │   │   │           ├── 1102
+│   │   │   │           ├── 1160
+│   │   │   │           ├── 1179
+│   │   │   │           ├── 164
+│   │   │   │           ├── 186
+│   │   │   │           ├── 229
+│   │   │   │           ├── 252
+│   │   │   │           ├── 266
+│   │   │   │           ├── 277
+│   │   │   │           ├── 3
+│   │   │   │           ├── 326
+│   │   │   │           ├── 349
+│   │   │   │           ├── 38
+│   │   │   │           ├── 384
+│   │   │   │           ├── 390
+│   │   │   │           ├── 468
+│   │   │   │           ├── 550
+│   │   │   │           ├── 572
+│   │   │   │           ├── 645
+│   │   │   │           ├── 662
+│   │   │   │           ├── 705
+│   │   │   │           ├── 727
+│   │   │   │           ├── 759
+│   │   │   │           ├── 888
+│   │   │   │           ├── 929
+│   │   │   │           ├── 934
+│   │   │   │           ├── 939
+│   │   │   │           └── 977
 │   │   │   └── original
 │   │   │       └── xtts
 │   │   └── real
@@ -213,7 +245,6 @@ Project Folder Structure
 │           │   ├── 3sec
 │           │   └── 5sec
 │           └── original
-├── dataset.zip
 ├── evaluate_asvspoof.py
 ├── evaluate_haaqi.py
 ├── folder_structure.py
@@ -224,6 +255,8 @@ Project Folder Structure
 ├── mp3towavconverter.py
 ├── outputs
 │   ├── deeprawnet.pth
+│   ├── deeprawnet_scenefake.pth
+│   ├── haaqi_scenefake.pth
 │   └── results.txt
 ├── requirements.txt
 ├── train_asvspoof.py
