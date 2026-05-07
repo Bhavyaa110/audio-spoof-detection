@@ -1,2 +1,4 @@
 venv/
 asvspoof_dataset/
+*.pth
+outputs/
