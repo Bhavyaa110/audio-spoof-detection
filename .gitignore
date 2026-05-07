@@ -2,3 +2,7 @@ venv/
 asvspoof_dataset/
 *.pth
 outputs/
+__pycache__/
+*.pyc
+*.pth
+dataset/

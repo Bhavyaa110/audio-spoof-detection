@@ -23,6 +23,10 @@ class ASVspoofDataset(Dataset):
 
     def __len__(self):
         return len(self.data)
+    
+    @property
+    def labels(self):
+        return [label for _, label in self.data]
 
     def __getitem__(self, idx):
         file_name, label = self.data[idx]
