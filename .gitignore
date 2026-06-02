@@ -1,8 +1,41 @@
+# Virtual Environment
+.venv/
 venv/
-asvspoof_dataset/
-*.pth
-outputs/
+
+# Python cache
 __pycache__/
 *.pyc
+*.pyo
+*.pyd
+
+# Model weights
 *.pth
+*.pt
+*.bin
+
+# Outputs
+outputs/
+logs/
+runs/
+
+# Dataset folders
 dataset/
+asvspoof_dataset/
+
+# HuggingFace cache
+.cache/
+huggingface/
+
+# Jupyter
+.ipynb_checkpoints/
+
+# VS Code
+.vscode/
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Temp
+*.tmp
+*.log
