@@ -2,10 +2,19 @@ import torch
 import numpy as np
 from sklearn.metrics import roc_curve
 from torch.utils.data import DataLoader
-
+torch.backends.cudnn.benchmark = True
 from models.mix_deeprawnet import MixDeepRawNet
 from utils.mix_loader import MixDataset
 from config import *
+
+print(f"Using Device : {DEVICE}")
+
+if torch.cuda.is_available():
+    print(
+        f"GPU : {torch.cuda.get_device_name(0)}"
+    )
+else:
+    print("Running on CPU")
 
 def compute_eer(labels, scores):
     fpr, tpr, _ = roc_curve(labels, scores, pos_label=1)
@@ -20,7 +29,8 @@ dataset = MixDataset(
 
 loader = DataLoader(
     dataset,
-    batch_size=2
+    batch_size=2,
+    pin_memory=torch.cuda.is_available(),
 )
 
 model = MixDeepRawNet().to(

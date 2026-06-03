@@ -1,41 +1,80 @@
+# =========================
 # Virtual Environment
+# =========================
 .venv/
 venv/
 
+# =========================
 # Python cache
+# =========================
 __pycache__/
 *.pyc
 *.pyo
 *.pyd
 
-# Model weights
+# =========================
+# Model Weights / Checkpoints
+# =========================
 *.pth
 *.pt
 *.bin
-
-# Outputs
+checkpoints/
 outputs/
+
+# =========================
+# Logs / Runs
+# =========================
 logs/
 runs/
+*.log
 
-# Dataset folders
+# =========================
+# Datasets
+# =========================
 dataset/
+data/
+data_repo/
 asvspoof_dataset/
 
-# HuggingFace cache
+# =========================
+# HuggingFace / Cache
+# =========================
 .cache/
 huggingface/
+hf_cache/
 
+# =========================
 # Jupyter
+# =========================
 .ipynb_checkpoints/
 
-# VS Code
+# =========================
+# IDE / Editor
+# =========================
 .vscode/
+.idea/
 
+# =========================
 # OS files
+# =========================
 .DS_Store
 Thumbs.db
 
-# Temp
+# =========================
+# Temp files
+# =========================
 *.tmp
-*.log
+temp/
+tmp/
+
+# =========================
+# Audio / Large Media (optional)
+# =========================
+*.wav
+*.flac
+*.mp3
+
+# =========================
+# BEATs / Downloaded Models
+# =========================
+BEATs_iter3_plus_AS2M.pt

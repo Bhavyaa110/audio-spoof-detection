@@ -1,9 +1,9 @@
 import torch
-import torchaudio
-from transformers import Wav2Vec2Model
-from transformers import Wav2Vec2Processor
-from transformers import AutoProcessor
-from transformers import AutoModel
+import torch.nn.functional as F
+from transformers import Wav2Vec2Model, Wav2Vec2Processor
+
+from unilm.beats.BEATs import BEATs, BEATsConfig
+
 
 class FeatureExtractor:
 
@@ -13,64 +13,104 @@ class FeatureExtractor:
 
         print("Loading wav2vec...")
 
-        self.w2v_processor = Wav2Vec2Processor.from_pretrained(
+        self.processor = Wav2Vec2Processor.from_pretrained(
             "facebook/wav2vec2-base"
         )
 
-        self.w2v = Wav2Vec2Model.from_pretrained(
+        self.wav2vec = Wav2Vec2Model.from_pretrained(
             "facebook/wav2vec2-base"
         ).to(device)
+
+        self.wav2vec.eval()
 
         print("Loading BEATs...")
 
-        self.beats_processor = AutoProcessor.from_pretrained(
-            "facebook/beats-base"
+        checkpoint = torch.load(
+            "checkpoints/BEATs_iter3_plus_AS2M.pt",
+            map_location=device
         )
 
-        self.beats = AutoModel.from_pretrained(
-            "facebook/beats-base"
-        ).to(device)
+        cfg = BEATsConfig(
+            checkpoint["cfg"]
+        )
 
-    def extract(self, waveform, sr):
+        self.beats = BEATs(
+            cfg
+        )
+
+        self.beats.load_state_dict(
+            checkpoint["model"]
+        )
+
+        self.beats = self.beats.to(
+            device
+        )
+
+        self.beats.eval()
+
+    def extract(self, wav, sr):
+
+        wav = wav.to(
+            self.device
+        )
 
         if sr != 16000:
-            waveform = torchaudio.functional.resample(
-                waveform,
-                sr,
-                16000
-            )
 
-        waveform = waveform.squeeze()
-
-        # WAV2VEC
-        w2v_inputs = self.w2v_processor(
-            waveform.numpy(),
-            sampling_rate=16000,
-            return_tensors="pt"
-        )
-
-        # BEATS
-        beats_inputs = self.beats_processor(
-            waveform.numpy(),
-            sampling_rate=16000,
-            return_tensors="pt"
-        )
+            wav = F.interpolate(
+                wav.unsqueeze(0),
+                size=int(
+                    wav.shape[-1]
+                    * 16000
+                    / sr
+                ),
+                mode="linear",
+                align_corners=False
+            ).squeeze(0)
 
         with torch.no_grad():
 
-            w2v_feat = self.w2v(
-                w2v_inputs.input_values.to(self.device)
+            # WAV2VEC
+            inp = self.processor(
+                wav.squeeze(0).cpu().numpy(),
+                sampling_rate=16000,
+                return_tensors="pt"
+            )
+
+            inp = {
+                k: v.to(self.device)
+                for k, v in inp.items()
+            }
+
+            wav2vec_feat = self.wav2vec(
+                **inp
             ).last_hidden_state
 
-            beats_feat = self.beats(
-                beats_inputs.input_values.to(self.device)
-            ).last_hidden_state
+            # BEATS
+            beats_feat, _ = self.beats.extract_features(
+                wav
+            )
 
-        # concat
+            # ALIGN LENGTHS
+            min_len = min(
+                wav2vec_feat.size(1),
+                beats_feat.size(1)
+            )
 
-        feat = torch.cat(
-            [w2v_feat, beats_feat],
-            dim=-1
-        )
+            wav2vec_feat = wav2vec_feat[
+                :, :min_len, :
+            ]
+
+            beats_feat = beats_feat[
+                :, :min_len, :
+            ]
+
+            # CONCAT
+            feat = torch.cat(
+                [
+                    wav2vec_feat,
+                    beats_feat
+                ],
+                dim=2
+            )
 
         return feat.squeeze(0)

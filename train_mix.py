@@ -5,11 +5,19 @@ import numpy as np
 from tqdm import tqdm
 from torch.utils.data import DataLoader, random_split
 from sklearn.metrics import roc_curve
-
+from torch.nn.utils.rnn import pad_sequence
 from models.mix_deeprawnet import MixDeepRawNet
 from utils.mix_loader import MixDataset
 from config import *
 
+print(f"Using Device : {DEVICE}")
+
+if torch.cuda.is_available():
+    print(
+        f"GPU : {torch.cuda.get_device_name(0)}"
+    )
+else:
+    print("Running on CPU")
 def compute_eer(labels, scores):
     fpr, tpr, _ = roc_curve(labels, scores, pos_label=1)
     fnr = 1 - tpr
@@ -17,32 +25,50 @@ def compute_eer(labels, scores):
     eer = (fpr[idx] + fnr[idx]) / 2 * 100
     return eer
 
-print(f"Running on: {DEVICE}")
 
-dataset = MixDataset("train")
 
-train_size = int(0.8 * len(dataset))
-val_size = len(dataset) - train_size
-
-train_dataset, val_dataset = random_split(
-    dataset,
-    [train_size, val_size]
+train_dataset = MixDataset(
+    "train"
 )
+
+val_dataset = MixDataset(
+    "val"
+)
+def collate_fn(batch):
+
+    feats, labels = zip(*batch)
+
+    feats = pad_sequence(
+        feats,
+        batch_first=True
+    )
+
+    labels = torch.tensor(
+        labels,
+        dtype=torch.long
+    )
+
+    return feats, labels
 
 train_loader = DataLoader(
     train_dataset,
-    batch_size=2,
-    shuffle=True
+    batch_size=BATCH_SIZE,
+    shuffle=True,
+    collate_fn=collate_fn
 )
 
 val_loader = DataLoader(
     val_dataset,
-    batch_size=2,
-    shuffle=False
+    batch_size=BATCH_SIZE,
+    shuffle=False,
+    collate_fn=collate_fn
 )
-
-print(f"Train Samples : {len(train_dataset)}")
-print(f"Val Samples   : {len(val_dataset)}")
+print(
+    f"Train Samples : {len(train_dataset)}"
+)
+print(
+    f"Val Samples   : {len(val_dataset)}"
+)
 
 model = MixDeepRawNet().to(DEVICE)
 
