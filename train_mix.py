@@ -1,4 +1,5 @@
 import os
+import pandas as pd
 import torch
 import torch.nn as nn
 import numpy as np
@@ -9,6 +10,10 @@ from torch.nn.utils.rnn import pad_sequence
 from models.mix_deeprawnet import MixDeepRawNet
 from utils.mix_loader import MixDataset
 from config import *
+
+print("Testing parquet...")
+df = pd.read_parquet("data_repo/data/train-00000-of-00001.parquet")
+print(df.shape)
 
 print(f"Using Device : {DEVICE}")
 
