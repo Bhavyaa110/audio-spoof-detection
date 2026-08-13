@@ -8,7 +8,7 @@ class MixDeepRawNet(nn.Module):
         super().__init__()
 
         self.gru = nn.GRU(
-            input_size=1536,
+            input_size=768, #512
             hidden_size=512,
             batch_first=True
         )

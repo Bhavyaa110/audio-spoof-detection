@@ -34,7 +34,10 @@ Project Folder Structure
 │   └── README.LA.txt
 ├── audio_cleaning.py
 ├── audio_framing.py
+├── check_audio_duplicates.py
 ├── config.py
+├── create_pca.py
+├── create_speaker_split.py
 ├── evaluate_asvspoof.py
 ├── evaluate_haaqi.py
 ├── evaluate_mix.py
@@ -46,9 +49,12 @@ Project Folder Structure
 │   └── mix_deeprawnet.py
 ├── mp3towavconverter.py
 ├── outputs
+│   ├── beats_best_model.pth
+│   ├── beats_eval.txt
 │   ├── deeprawnet.pth
 │   ├── deeprawnet_scenefake.pth
 │   ├── haaqi_scenefake.pth
+│   ├── mix_pca_best_model.pth
 │   └── results.txt
 ├── requirements.txt
 ├── train_asvspoof.py
@@ -57,8 +63,10 @@ Project Folder Structure
 ├── utils
 │   ├── asvspoof_loader.py
 │   ├── audio_utils.py
+│   ├── beats.py
 │   ├── beats_wave2vec.py
 │   ├── dataset_custom.py
 │   ├── mix_loader.py
-│   └── train_utils.py
+│   ├── train_utils.py
+│   └── wave2vec.py
 └── viewresult.py

@@ -190,7 +190,9 @@ for epoch in range(EPOCHS):
         best_val_eer = val_eer
         torch.save(
             model.state_dict(),
-            "outputs/mix_model.pth"
+            #"outputs/beats_best_model.pth"
+            #"outputs/wave2vec_best_model.pth"
+            "outputs/mix_pca_best_model.pth"
         )
         print("Best model saved")
 
@@ -200,7 +202,10 @@ os.makedirs(
 )
 
 with open(
-    "outputs/mix_results.txt",
+    #"outputs/beats_train.txt",
+    #"outputs/wave2vec_train.txt",
+    "outputs/mix_pca.txt",
+
     "w"
 ) as f:
 

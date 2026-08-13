@@ -2,6 +2,7 @@ import torch
 import numpy as np
 from sklearn.metrics import roc_curve
 from torch.utils.data import DataLoader
+from torch.nn.utils.rnn import pad_sequence
 torch.backends.cudnn.benchmark = True
 from models.mix_deeprawnet import MixDeepRawNet
 from utils.mix_loader import MixDataset
@@ -15,6 +16,21 @@ if torch.cuda.is_available():
     )
 else:
     print("Running on CPU")
+def collate_fn(batch):
+
+    feats, labels = zip(*batch)
+
+    feats = pad_sequence(
+        feats,
+        batch_first=True
+    )
+
+    labels = torch.tensor(
+        labels,
+        dtype=torch.long
+    )
+
+    return feats, labels
 
 def compute_eer(labels, scores):
     fpr, tpr, _ = roc_curve(labels, scores, pos_label=1)
@@ -30,7 +46,9 @@ dataset = MixDataset(
 loader = DataLoader(
     dataset,
     batch_size=2,
-    pin_memory=torch.cuda.is_available(),
+    shuffle=False,
+    collate_fn=collate_fn,
+    pin_memory=torch.cuda.is_available()
 )
 
 model = MixDeepRawNet().to(
@@ -39,7 +57,9 @@ model = MixDeepRawNet().to(
 
 model.load_state_dict(
     torch.load(
-        "outputs/mix_model.pth",
+        #"outputs/beats_best_model.pth",
+        #"outputs/wave2vec_best_model.pth",
+        "outputs/mix_pca_best_model.pth",
         map_location=DEVICE
     )
 )
@@ -90,7 +110,9 @@ print(f"Evaluation EER      : {eer:.2f}%")
 print("="*50)
 
 with open(
-    "outputs/mix_eval.txt",
+    #"outputs/beats_eval.txt",
+    #"outputs/wave2vec_eval.txt",
+    "outputs/mix_pca_eval.txt",
     "w"
 ) as f:
 

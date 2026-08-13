@@ -3,7 +3,7 @@ import os
 output_file = "folder_structure.txt"
 start_path = "."
 
-ignore = {".git", "__pycache__", ".venv", ".idea"}
+ignore = {".git", "__pycache__", ".venv", ".idea", ".cache", "data_repo", "logs", "output", "results", "checkpoints", "weights", "runs", "tmp", "unilm"}
 
 audio_ext = (".wav", ".flac", ".mp3", ".mp4")
 

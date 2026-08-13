@@ -4,7 +4,9 @@ import librosa
 import torch
 from torch.utils.data import Dataset
 
-from utils.beats_wave2vec import FeatureExtractor
+from utils.beats import FeatureExtractor
+#from utils.wave2vec import FeatureExtractor
+#from utils.beats_wave2vec import FeatureExtractor
 from config import DEVICE
 
 
@@ -13,14 +15,14 @@ class MixDataset(Dataset):
     def __init__(self, split):
 
         parquet_map = {
-            "train": "train-00000-of-00001.parquet",
-            "val": "validation-00000-of-00001.parquet",
-            "test": "test-00000-of-00001.parquet"
+            "train": "train.parquet",
+            "val": "validation.parquet",
+            "test": "test.parquet"
         }
 
         parquet_path = os.path.join(
             "data_repo",
-            "data",
+            "speaker_split",
             parquet_map[split]
         )
 
@@ -83,10 +85,10 @@ class MixDataset(Dataset):
             sr
         )
 
-        label = (
-            0
-            if row["label"] == "real"
-            else 1
-        )
-
+        if row["label"] == "real":
+            label = 0
+        elif row["label"] == "fake":
+            label = 1
+        else:
+            raise ValueError(f"Unknown label: {row['label']}")
         return feat, label

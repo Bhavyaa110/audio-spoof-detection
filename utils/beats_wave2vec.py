@@ -4,6 +4,7 @@ from transformers import Wav2Vec2Model, Wav2Vec2Processor
 
 from unilm.beats.BEATs import BEATs, BEATsConfig
 
+import pickle
 
 class FeatureExtractor:
 
@@ -47,6 +48,12 @@ class FeatureExtractor:
         )
 
         self.beats.eval()
+        with open(
+            "checkpoints/pca_mix.pkl",
+            "rb"
+        ) as f:
+
+            self.pca = pickle.load(f)
 
     def extract(self, wav, sr):
 
@@ -113,4 +120,16 @@ class FeatureExtractor:
                 dim=2
             )
 
-        return feat.squeeze(0)
+            feat = feat.squeeze(0)
+
+            feat = self.pca.transform(
+                feat.cpu().numpy()
+            )
+
+            feat = torch.tensor(
+                feat,
+                dtype=torch.float32,
+                device=self.device
+            )
+
+            return feat
