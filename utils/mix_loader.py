@@ -4,9 +4,9 @@ import librosa
 import torch
 from torch.utils.data import Dataset
 
-from utils.beats import FeatureExtractor
+#from utils.beats import FeatureExtractor
 #from utils.wave2vec import FeatureExtractor
-#from utils.beats_wave2vec import FeatureExtractor
+from utils.beats_wave2vec import FeatureExtractor
 from config import DEVICE
 
 
